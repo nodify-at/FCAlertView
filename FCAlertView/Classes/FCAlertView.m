@@ -343,7 +343,7 @@
         _textField.layer.borderWidth = 1.0f;
         _textField.delegate = self;
         _textField.placeholder = [[alertTextFields firstObject] objectForKey:@"placeholder"];
-
+        
         UIView *paddingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, 20)];
         _textField.leftView = paddingView;
         _textField.leftViewMode = UITextFieldViewModeAlways;
@@ -560,18 +560,14 @@
     [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(alertViewContents.frame.size.width/2 - 30.0f, -30.0f, 60.0f, 60.0f)] CGPath]];
     [circleLayer setFillColor:[UIColor whiteColor].CGColor];
     
-    UIButton *alertViewVector;
-    
-    if (_avoidCustomImageTint && alertType.length == 0)
-        alertViewVector = [UIButton buttonWithType:UIButtonTypeCustom];
-    else
-        alertViewVector = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    alertViewVector.frame = CGRectMake(alertViewContents.frame.size.width/2 - 15.0f,
-                                       -15.0f,
-                                       30.0f,
-                                       30.0f);
-    [alertViewVector setImage:vectorImage forState:UIControlStateNormal];
+    UIImageView *alertViewVector = [[UIImageView alloc] init];
+    alertViewVector.contentMode  = UIViewContentModeScaleAspectFit;
+    alertViewVector.image        = vectorImage;
+    alertViewVector.frame = CGRectMake(alertViewContents.frame.size.width/2 -
+                                       23.0f,
+                                       -23.0f,
+                                       46.0f,
+                                       46.0f);
     alertViewVector.userInteractionEnabled = 0;
     alertViewVector.tintColor = _colorScheme;
     
@@ -682,7 +678,7 @@
                                [[NSBundle mainBundle] resourcePath], filename];
     NSURL *soundFileURL = [NSURL fileURLWithPath:soundFilePath];
     player = [[AVAudioPlayer alloc] initWithContentsOfURL:soundFileURL
-                                                     error:nil];
+                                                    error:nil];
     player.numberOfLoops = 0;
     
 }
@@ -797,7 +793,7 @@
             [self performSelector:@selector(dismissAlertView) withObject:nil afterDelay:self.autoHideSeconds];
         }
     }];
-
+    
     // Playing Sound for Alert (when there is one)
     
     [player play];
