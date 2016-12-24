@@ -745,8 +745,7 @@
 }
 
 - (void)setAlertViewAttributes:(NSString *)title withSubtitle:(NSString *)subTitle withCustomImage:(UIImage *)image withDoneButtonTitle:(NSString *)done andButtons:(NSArray *)buttons{
-    
-    self.title = title;
+
     self.subTitle = subTitle;
     
     for (int i = 0; i < buttons.count; i++) {
