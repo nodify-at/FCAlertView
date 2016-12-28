@@ -283,7 +283,7 @@
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
     fillLayer.path = rectPath.CGPath;
     fillLayer.fillRule = kCAFillRuleEvenOdd;
-    fillLayer.fillColor = [UIColor whiteColor].CGColor;
+    fillLayer.fillColor = self.circleColor.CGColor;
     fillLayer.opacity = 1.0;
     
     if (alertViewWithVector)

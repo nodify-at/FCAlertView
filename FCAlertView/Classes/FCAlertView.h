@@ -60,7 +60,7 @@
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *subTitle;
-
+@property (nonatomic, retain) UIColor  *circleColor;
 // AlertView Background
 
 @property (nonatomic, retain) UIView *alertBackground;
