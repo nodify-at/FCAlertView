@@ -357,10 +357,7 @@
     if (_numberOfButtons == 0) { // View only contains DONE/DISMISS Button
         
         UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        if (_colorScheme == nil)
-            doneButton.backgroundColor = [UIColor whiteColor];
-        else
-            doneButton.backgroundColor = _colorScheme;
+        doneButton.backgroundColor = [UIColor whiteColor];
         doneButton.frame = CGRectMake(0,
                                       alertViewFrame.size.height - 45,
                                       alertViewFrame.size.width,
