@@ -283,7 +283,7 @@
     CAShapeLayer *fillLayer = [CAShapeLayer layer];
     fillLayer.path = rectPath.CGPath;
     fillLayer.fillRule = kCAFillRuleEvenOdd;
-    fillLayer.fillColor = self.circleColor.CGColor;
+    fillLayer.fillColor = [UIColor whiteColor].CGColor;
     fillLayer.opacity = 1.0;
     
     if (alertViewWithVector)
@@ -295,7 +295,7 @@
                                                                     20.0f + (alertViewWithVector * 30),
                                                                     alertViewFrame.size.width - 30.0f,
                                                                     20.0f)];
-    titleLabel.font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightMedium];
+    titleLabel.font = self.descriptionFont;
     titleLabel.numberOfLines = 1;
     titleLabel.textColor = self.titleColor;
     titleLabel.text = self.title;
@@ -310,7 +310,7 @@
                                                                           descriptionLevel + (alertViewWithVector * 30),
                                                                           alertViewFrame.size.width - 50.0f,
                                                                           60.0f)];
-    descriptionLabel.font = [UIFont systemFontOfSize:15.0f weight:UIFontWeightLight];
+    descriptionLabel.font = self.descriptionFont;
     descriptionLabel.numberOfLines = 4;
     descriptionLabel.textColor = self.subTitleColor;
     descriptionLabel.text = self.subTitle;
@@ -319,16 +319,12 @@
     
     descriptionLabelFrames = descriptionLabel.frame;
     
-    if (_title == nil) {
-        descriptionLabel.font = [UIFont systemFontOfSize:16.0f weight:UIFontWeightRegular];
-    }
-    
     // SEPARATOR LINE - Seperating Header View with Button View
     
     UIView* separatorLineView = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                          alertViewFrame.size.height - 47,
                                                                          alertViewFrame.size.width,
-                                                                         2)];
+                                                                         1)];
     separatorLineView.backgroundColor = [UIColor colorWithWhite:100.0f/255.0f alpha:1.0]; // set color as you want.
     
     // TEXTFIELD VIEW - Section with TextField
@@ -366,9 +362,8 @@
         [doneButton addTarget:self action:@selector(donePressed) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(btnTouched) forControlEvents:UIControlEventTouchDown];
         [doneButton addTarget:self action:@selector(btnReleased) forControlEvents:UIControlEventTouchDragExit];
-        doneButton.titleLabel.font = [UIFont systemFontOfSize:18.0f weight:UIFontWeightMedium];
-        if (_colorScheme != nil)
-            doneButton.tintColor = [UIColor whiteColor];
+        doneButton.titleLabel.font = self.buttonFont;
+        doneButton.tintColor = self.buttonColor;
         
         if (!_hideAllButtons && !_hideDoneButton)
             [alertView addSubview:doneButton];
@@ -376,10 +371,7 @@
     } else if (_numberOfButtons == 1) { // View also contains OTHER (One) Button
         
         UIButton *doneButton = [UIButton buttonWithType:UIButtonTypeSystem];
-        if (_colorScheme == nil)
-            doneButton.backgroundColor = [UIColor whiteColor];
-        else
-            doneButton.backgroundColor = _colorScheme;
+        doneButton.backgroundColor = [UIColor whiteColor];
         doneButton.frame = CGRectMake(alertViewFrame.size.width/2,
                                       alertViewFrame.size.height - 45,
                                       alertViewFrame.size.width/2,
@@ -388,9 +380,8 @@
         [doneButton addTarget:self action:@selector(donePressed) forControlEvents:UIControlEventTouchUpInside];
         [doneButton addTarget:self action:@selector(btnTouched) forControlEvents:UIControlEventTouchDown];
         [doneButton addTarget:self action:@selector(btnReleased) forControlEvents:UIControlEventTouchDragExit];
-        doneButton.titleLabel.font = [UIFont systemFontOfSize:16.0f weight:UIFontWeightMedium];
-        if (_colorScheme != nil)
-            doneButton.tintColor = [UIColor whiteColor];
+        doneButton.titleLabel.font = self.buttonFont;
+        doneButton.tintColor = self.buttonColor;
         
         UIButton *otherButton = [UIButton buttonWithType:UIButtonTypeSystem];
         otherButton.backgroundColor = [UIColor whiteColor];
@@ -407,8 +398,8 @@
         [otherButton addTarget:self action:@selector(handleButton:) forControlEvents:UIControlEventTouchUpInside];
         [otherButton addTarget:self action:@selector(btnTouched) forControlEvents:UIControlEventTouchDown];
         [otherButton addTarget:self action:@selector(btnReleased) forControlEvents:UIControlEventTouchDragExit];
-        otherButton.titleLabel.font = [UIFont systemFontOfSize:16.0f weight:UIFontWeightRegular];
-        otherButton.tintColor = self.colorScheme;
+        otherButton.titleLabel.font = self.buttonFont;
+        otherButton.tintColor       = self.buttonColor;
         otherButton.titleLabel.adjustsFontSizeToFitWidth = YES;
         otherButton.titleLabel.minimumScaleFactor = 0.8;
         
@@ -421,7 +412,7 @@
         
         UIView *horizontalSeparator = [[UIView alloc] initWithFrame:CGRectMake(alertViewFrame.size.width/2 - 1,
                                                                                otherButton.frame.origin.y - 2,
-                                                                               2,
+                                                                               1,
                                                                                47)];
         
         horizontalSeparator.backgroundColor = [UIColor colorWithWhite:100.0f/255.0f alpha:1.0]; // set color as you want.
@@ -555,7 +546,7 @@
     
     circleLayer = [CAShapeLayer layer];
     [circleLayer setPath:[[UIBezierPath bezierPathWithOvalInRect:CGRectMake(alertViewContents.frame.size.width/2 - 30.0f, -30.0f, 60.0f, 60.0f)] CGPath]];
-    [circleLayer setFillColor:[UIColor whiteColor].CGColor];
+    [circleLayer setFillColor:self.circleColor.CGColor];
     
     UIImageView *alertViewVector = [[UIImageView alloc] init];
     alertViewVector.contentMode  = UIViewContentModeScaleAspectFit;
@@ -742,7 +733,7 @@
 }
 
 - (void)setAlertViewAttributes:(NSString *)title withSubtitle:(NSString *)subTitle withCustomImage:(UIImage *)image withDoneButtonTitle:(NSString *)done andButtons:(NSArray *)buttons{
-
+    
     self.subTitle = subTitle;
     
     for (int i = 0; i < buttons.count; i++) {

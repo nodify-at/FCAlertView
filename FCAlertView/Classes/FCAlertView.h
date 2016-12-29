@@ -49,7 +49,7 @@
     // Alert AudioPlayer
     
     AVAudioPlayer *player;
-
+    
 }
 
 // Delegate
@@ -61,6 +61,10 @@
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *subTitle;
 @property (nonatomic, retain) UIColor  *circleColor;
+@property (nonatomic, retain) UIColor  *buttonColor;
+@property (nonatomic, retain) UIFont   *buttonFont;
+@property (nonatomic, retain) UIFont   *descriptionFont;
+
 // AlertView Background
 
 @property (nonatomic, retain) UIView *alertBackground;
