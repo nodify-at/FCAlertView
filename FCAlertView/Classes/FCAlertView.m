@@ -107,7 +107,7 @@
     } else {
         return _customSpacing;
     }
-    
+    return _customSpacing;
 }
 
 - (CGFloat) configureAVHeight {
@@ -966,7 +966,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     [textField endEditing:YES];
-    
+    return TRUE;
 }
 
 #pragma mark - Text Field Changed
